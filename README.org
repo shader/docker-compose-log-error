@@ -1,0 +1,39 @@
+* Minimum working example of docker-compose logging bug
+
+  To test this example, simple run `docker-compose up`
+
+  The output should be something like:
+
+#+begin_src
+Creating network "dockercomposelogerror_default" with the default driver
+Building docker-compose-log-error
+Step 1/4 : FROM alpine
+ ---> 88e169ea8f46
+Step 2/4 : WORKDIR /root
+ ---> 051355222981
+Removing intermediate container c90551860235
+Step 3/4 : COPY main.sh /root
+ ---> a2e1604df75b
+Removing intermediate container a20156395f51
+Step 4/4 : ENTRYPOINT ./main.sh
+ ---> Running in 9b06bd49dd7a
+ ---> 79b00f2cbe9c
+Removing intermediate container 9b06bd49dd7a
+Successfully built 79b00f2cbe9c
+WARNING: Image for service docker-compose-log-error was built because it did not already exist. To rebuild this image you must use `
+docker-compose build` or `docker-compose up --build`.                                                                              
+Creating dockercomposelogerror_docker-compose-log-error_1
+Attaching to dockercomposelogerror_docker-compose-log-error_1
+Traceback (most recent call last):
+  File "/usr/lib/python-exec/python3.4/docker-compose", line 11, in <module>
+    load_entry_point('docker-compose==1.9.0', 'console_scripts', 'docker-compose')()
+  File "/usr/lib64/python3.4/site-packages/compose/cli/main.py", line 65, in main
+    command()
+  File "/usr/lib64/python3.4/site-packages/compose/cli/main.py", line 117, in perform_command
+    handler(command, command_options)
+  File "/usr/lib64/python3.4/site-packages/compose/cli/main.py", line 862, in up
+    log_printer.run()
+  File "/usr/lib64/python3.4/site-packages/compose/cli/log_printer.py", line 98, in run
+    self.output.write(line)
+UnicodeEncodeError: 'ascii' codec can't encode character '\xb5' in position 39: ordinal not in range(128)
+#+end_src
