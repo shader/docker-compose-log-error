@@ -1,6 +1,6 @@
 * Minimum working example of docker-compose logging bug
 
-  To test this example, simple run `docker-compose up`
+  To test this example, simply run ~docker-compose up~
 
   The output should be something like:
 
